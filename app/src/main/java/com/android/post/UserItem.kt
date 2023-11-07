@@ -26,6 +26,13 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun UserItem(modifier: Modifier = Modifier) {
+    Column {
+        UserHeaderItem(modifier = Modifier)
+    }
+}
+
+@Composable
+private fun UserHeaderItem(modifier: Modifier = Modifier) {
     Row(
         verticalAlignment = Alignment.CenterVertically, modifier = modifier
             .fillMaxWidth()
