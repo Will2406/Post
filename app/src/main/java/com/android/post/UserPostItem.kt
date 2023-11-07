@@ -16,11 +16,12 @@ fun UserPostItem(title: String, description: String, modifier: Modifier = Modifi
     Column(
         modifier = modifier
             .fillMaxWidth()
-            .padding(8.dp)
+            .padding(horizontal = 16.dp, vertical = 8.dp)
     ) {
         Text(
             text = title,
-            fontSize = 16.sp
+            fontSize = 16.sp,
+            modifier = Modifier.padding(bottom = 4.dp)
         )
         Text(
             text = description,
