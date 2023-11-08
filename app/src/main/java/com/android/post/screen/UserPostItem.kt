@@ -1,4 +1,4 @@
-package com.android.post
+package com.android.post.screen
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxWidth

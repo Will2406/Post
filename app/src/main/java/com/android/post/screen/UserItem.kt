@@ -1,4 +1,4 @@
-package com.android.post
+package com.android.post.screen
 
 import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
@@ -35,10 +35,11 @@ import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.android.post.R
+import com.android.post.domain.model.UserModel
 
 @Composable
-fun UserItem(modifier: Modifier = Modifier) {
-
+fun UserItem(user: UserModel, modifier: Modifier = Modifier) {
     Card(
         modifier = modifier
             .padding(8.dp)
@@ -59,7 +60,7 @@ fun UserItem(modifier: Modifier = Modifier) {
                 )
         ) {
 
-            HeaderUserItem(modifier = Modifier) { expanded = it }
+            HeaderUserItem(user = user, modifier = Modifier) { expanded = it }
 
             if (expanded) {
                 for (i in 1..5) {
@@ -80,7 +81,7 @@ fun UserItem(modifier: Modifier = Modifier) {
 }
 
 @Composable
-private fun HeaderUserItem(modifier: Modifier = Modifier, expanded: (Boolean) -> Unit) {
+private fun HeaderUserItem(user: UserModel, modifier: Modifier = Modifier, expanded: (Boolean) -> Unit) {
 
     var expandedState by remember { mutableStateOf(false) }
 
@@ -98,9 +99,9 @@ private fun HeaderUserItem(modifier: Modifier = Modifier, expanded: (Boolean) ->
         )
 
         UserItemDescription(
-            name = "Daniel Quispe",
-            city = "Lima,Peru",
-            email = "william.quispe2497@icloud.com",
+            name = user.name,
+            city = user.country,
+            email = user.email,
             modifier = Modifier.weight(1f)
         )
 
@@ -118,21 +119,15 @@ private fun HeaderUserItem(modifier: Modifier = Modifier, expanded: (Boolean) ->
 @Composable
 private fun UserItemDescription(name: String, city: String, email: String, modifier: Modifier) {
     Column(modifier = modifier) {
-        Row(
-            verticalAlignment = Alignment.CenterVertically,
-            modifier = Modifier.fillMaxWidth()
-        ) {
-            Text(
-                text = name,
-                fontWeight = FontWeight.Medium,
-                fontSize = 14.sp
-            )
-            Text(
-                text = city, fontSize = 12.sp,
-                fontWeight = FontWeight.Light,
-                modifier = Modifier.padding(start = 8.dp)
-            )
-        }
+        Text(
+            text = name,
+            fontWeight = FontWeight.Medium,
+            fontSize = 14.sp
+        )
+        Text(
+            text = city, fontSize = 12.sp,
+            fontWeight = FontWeight.Light,
+        )
         Text(
             text = email,
             fontSize = 14.sp,
@@ -148,7 +143,6 @@ private fun UserItemDescription(name: String, city: String, email: String, modif
 private fun UserItemButton(
     expanded: Boolean,
     onClick: () -> Unit,
-    modifier: Modifier = Modifier
 ) {
     IconButton(onClick = onClick) {
         Icon(
@@ -164,6 +158,6 @@ private fun UserItemButton(
 @Composable
 fun PreviewUserItem() {
     MaterialTheme {
-        UserItem()
+
     }
 }

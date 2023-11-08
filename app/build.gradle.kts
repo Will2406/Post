@@ -1,18 +1,22 @@
 plugins {
     id("com.android.application")
     id("org.jetbrains.kotlin.android")
+
+    id("kotlin-kapt")
+    id("kotlin-parcelize")
+    id("com.google.dagger.hilt.android")
 }
 
 android {
-    namespace = "com.android.post"
-    compileSdk = 34
+    namespace = Config.applicationAppId
+    compileSdk = Config.compileSdkVersion
 
     defaultConfig {
-        applicationId = "com.android.post"
-        minSdk = 27
-        targetSdk = 34
-        versionCode = 1
-        versionName = "1.0"
+        applicationId = Config.applicationAppId
+        minSdk = Config.minSdkVersion
+        targetSdk = Config.targetSdkVersion
+        versionCode = Config.versionCode
+        versionName = Config.versionName
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
         vectorDrawables {
@@ -27,12 +31,14 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_17
+        targetCompatibility = JavaVersion.VERSION_17
     }
+
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "17"
     }
+
     buildFeatures {
         compose = true
     }
@@ -48,25 +54,33 @@ android {
 
 dependencies {
 
-    implementation("androidx.core:core-ktx:1.9.0")
-    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.6.2")
-    implementation("androidx.activity:activity-compose:1.7.2")
-    implementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    implementation("androidx.compose.ui:ui")
-    implementation("androidx.compose.ui:ui-graphics")
-    implementation("androidx.compose.ui:ui-tooling-preview")
-    implementation("androidx.compose.material3:material3")
-    implementation("androidx.compose.foundation:foundation-android:1.5.4")
-    testImplementation("junit:junit:4.13.2")
-    androidTestImplementation("androidx.test.ext:junit:1.1.5")
-    androidTestImplementation("androidx.test.espresso:espresso-core:3.5.1")
-    androidTestImplementation(platform("androidx.compose:compose-bom:2023.03.00"))
-    androidTestImplementation("androidx.compose.ui:ui-test-junit4")
-    debugImplementation("androidx.compose.ui:ui-tooling")
-    debugImplementation("androidx.compose.ui:ui-test-manifest")
+    implementation(Dependencies.AndroidX.CoreKtx)
 
-    implementation("com.google.android.material:material:1.9.0")
+    implementation(Dependencies.Lyfecycle.runtime)
+    implementation(Dependencies.Compose.Activity)
+
+    implementation(platform(Dependencies.Compose.Boom))
+    implementation(Dependencies.Compose.UI)
+    implementation(Dependencies.Compose.Graphics)
+    implementation(Dependencies.Compose.Preview)
+
+    debugImplementation(Dependencies.Compose.Tooling)
+    debugImplementation(Dependencies.Compose.Manifest)
+
+    implementation(Dependencies.Compose.Material)
+    implementation(Dependencies.Compose.Material3)
+
+    testImplementation(Dependencies.Test.Junit)
+    androidTestImplementation(Dependencies.Test.JunitExt)
+    androidTestImplementation(Dependencies.Test.EspressoCore)
+
+    implementation(Dependencies.Navigation.Hilt_Compose)
+    implementation(Dependencies.Navigation.Compose)
+
+    implementation(Dependencies.Hilt.Hilt)
+    kapt(Dependencies.Hilt.Compiler)
+
     implementation("androidx.compose.material:material-icons-extended:1.4.1")
 
-
+    implementation(project(":domain"))
 }

@@ -5,8 +5,7 @@ import com.android.post.data.datasource.user.UserRemoteDataSource
 import javax.inject.Inject
 
 class UserRepository @Inject constructor(
-    private val remote: UserRemoteDataSource,
-    private val local: UserLocalDataSource
+    private val remote: UserRemoteDataSource
 ) {
 
     suspend fun getAllUsers() = remote.getUsers()
