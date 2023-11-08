@@ -10,7 +10,7 @@ class PostRemoteDataSourceImpl @Inject constructor(
     private val api: PostService
 ) : PostRemoteDataSource {
 
-    override suspend fun getPostByUser(idUser: String): Flow<List<PostResponse>> {
+    override suspend fun getPostByUser(idUser: Int): Flow<List<PostResponse>> {
         return flow {
             val response = api.getPostByUser(idUser)
             if (response.isSuccessful) {

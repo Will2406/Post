@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 rootProject.name = "post"
 include(":app")
 include(":data")
+include(":domain")

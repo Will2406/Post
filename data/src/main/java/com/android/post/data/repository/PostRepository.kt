@@ -9,6 +9,6 @@ class PostRepository @Inject constructor(
     private val local: PostLocalDataSource
 ) {
 
-    suspend fun getPostByUser(id: String) = remote.getPostByUser(idUser = id)
+    suspend fun getPostByUser(id: Int) = remote.getPostByUser(idUser = id)
 
 }

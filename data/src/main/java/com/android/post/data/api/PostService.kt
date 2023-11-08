@@ -6,12 +6,13 @@ import retrofit2.Response
 import retrofit2.http.GET
 import retrofit2.http.Path
 
+
 interface PostService {
 
     @GET("users")
     suspend fun getUsers(): Response<List<UserResponse>>
 
     @GET("users/{id}/posts")
-    suspend fun getPostByUser(@Path("id") id: String): Response<List<PostResponse>>
+    suspend fun getPostByUser(@Path("id") id: Int): Response<List<PostResponse>>
 
 }

@@ -5,7 +5,7 @@ import kotlinx.coroutines.flow.Flow
 
 
 interface PostRemoteDataSource {
-    suspend fun getPostByUser(idUser: String): Flow<List<PostResponse>>
+    suspend fun getPostByUser(idUser: Int): Flow<List<PostResponse>>
 }
 
 interface PostLocalDataSource {}
