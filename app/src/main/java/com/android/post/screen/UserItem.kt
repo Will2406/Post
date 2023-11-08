@@ -4,6 +4,8 @@ import androidx.compose.animation.animateContentSize
 import androidx.compose.animation.core.Spring
 import androidx.compose.animation.core.spring
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -28,6 +30,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
@@ -39,7 +42,10 @@ import com.android.post.R
 import com.android.post.domain.model.UserModel
 
 @Composable
-fun UserItem(user: UserModel, modifier: Modifier = Modifier) {
+fun UserItem(
+    user: UserModel,
+    modifier: Modifier = Modifier
+) {
     Card(
         modifier = modifier
             .padding(8.dp)
@@ -63,9 +69,10 @@ fun UserItem(user: UserModel, modifier: Modifier = Modifier) {
             HeaderUserItem(user = user, modifier = Modifier) { expanded = it }
 
             if (expanded) {
-                for (i in 1..5) {
-                    UserPostItem(title = "Nuevo post", description = "perros")
+                user.listPost.forEach {
+                    UserPostItem(title = it.title, description = it.description)
                 }
+
                 Button(
                     onClick = {},
                     shape = RoundedCornerShape(12.dp),
@@ -151,6 +158,63 @@ private fun UserItemButton(
         )
     }
 
+}
+
+@Composable
+fun UserItemLoader(modifier: Modifier = Modifier, brush: Brush) {
+    Card(
+        modifier = modifier
+            .padding(8.dp)
+            .clip(RoundedCornerShape(16.dp))
+    )
+
+    {
+        Row(
+            verticalAlignment = Alignment.CenterVertically, modifier = modifier
+                .fillMaxWidth()
+                .height(120.dp)
+        ) {
+            Box(
+                modifier = Modifier
+                    .background(brush)
+                    .clip(RoundedCornerShape(10.dp))
+                    .height(80.dp)
+                    .padding(start = 16.dp)
+                    .weight(0.5f)
+            )
+            Column(modifier = Modifier
+                .padding(start = 16.dp)
+                .weight(1f)) {
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(18.dp)
+                        .padding(bottom = 4.dp)
+                        .background(brush),
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(18.dp)
+                        .padding(bottom = 4.dp)
+                        .background(brush),
+                )
+                Box(
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .height(18.dp)
+                        .background(brush),
+                )
+            }
+
+            UserItemButton(
+                expanded = false,
+                onClick = {}
+
+            )
+        }
+
+    }
 }
 
 

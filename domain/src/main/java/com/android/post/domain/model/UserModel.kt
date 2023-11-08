@@ -6,7 +6,8 @@ data class UserModel(
     val id: Int,
     val name: String,
     val country: String,
-    val email: String
+    val email: String,
+    var listPost: MutableList<PostModel> = mutableListOf()
 )
 
 
@@ -14,7 +15,8 @@ fun UserResponse.convertToModel() = UserModel(
     id = id,
     name = name,
     country = "${address.street}, ${address.city}",
-    email = email
+    email = email,
+    listPost = mutableListOf()
 )
 
 fun List<UserResponse>.convertToModel() = map(UserResponse::convertToModel)
